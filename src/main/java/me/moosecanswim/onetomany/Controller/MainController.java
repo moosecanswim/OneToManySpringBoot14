@@ -61,6 +61,7 @@ public class MainController {
     @RequestMapping(value="/addMovie", method= RequestMethod.GET)
     public String addMovies(Model toSend){
         toSend.addAttribute("aMovie",new Movie());
+        toSend.addAttribute("listDirectors",directorRepository.findAll());
         return "FormMovie";
 
     }
@@ -75,8 +76,8 @@ public class MainController {
     @RequestMapping(value="/addDirector", method= RequestMethod.GET)
     public String addDirector(Model toSend){
         toSend.addAttribute("aDirector",new Director());
+        toSend.addAttribute("listMovies",movieRepository.findAll());
         return "FormDirector";
-
     }
     @RequestMapping(value="/addDirector", method= RequestMethod.POST)
     public String processDirector(@Valid Director aDirector, BindingResult result){

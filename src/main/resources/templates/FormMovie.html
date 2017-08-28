@@ -16,7 +16,7 @@
                             <div class="container">
                                 <form class="well form-horizontal"
                                       action="#"
-                                      th:action="@{/addMovies}"
+                                      th:action="@{/addMovie}"
                                       method="post"
                                       th:object="${aMovie}">
                                     <legend>Movie Form</legend>
@@ -31,8 +31,25 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!--select director-->
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label">Title: </label>
+                                            <label class="col-md-4 control-label">Director: </label>
+                                            <div class="col-md-4 inputGroupContainer">
+                                                <div class="input-group">
+                                                    <select th:field="*{director}">
+                                                        <option value="">Select Director</option>
+                                                        <option th:each="d:${listDirectors}"
+                                                                th:value="${d.id}"
+                                                                th:text="${d.name}">
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Release Year:</label>
                                             <div class="col-md-4 inputGroupContainer">
                                                 <div class="input-group">
                                                     <input type="text" th:field="*{year}"/>
@@ -40,7 +57,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label">Release Year: </label>
+                                            <label class="col-md-4 control-label">Description </label>
                                             <div class="col-md-4 inputGroupContainer">
                                                 <div class="input-group">
                                                     <textarea th:field="*{description}" cols="50" rows="4"/>
