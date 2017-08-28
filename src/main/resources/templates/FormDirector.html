@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>Director Form</title>
+    <th:block th:replace="base::header"></th:block>
+</head>
+<body>
+    <th:block th:replace="base::navigation"></th:block>
+    <div id="wrapper">
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!--Enter page content here -->
+                        <div class="container">
+                            <form class="well form-horizontal"
+                                  action="#"
+                                  th:action="@{/addDirector}"
+                                  method="post"
+                                  th:object="${aDirector}">
+                                <legend>Movie Form</legend>
+                                <fieldset>
+                                    <input type="hidden" th:field="*{id}"/>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Name: </label>
+                                        <div class="col-md-4 inputGroupContainer">
+                                            <div class="input-group">
+                                                <input type="text" th:field="*{name}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Genre: </label>
+                                        <div class="col-md-4 inputGroupContainer">
+                                            <div class="input-group">
+                                                <input type="text" th:field="*{genre}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <button type="submit" value="Submit">Submit</button>
+                                        <button type="reset" calue="Clear Form">Clear</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:replace="base::footer"></th:block>
+</body>
+</html>

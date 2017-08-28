@@ -1,4 +1,6 @@
-package me.moosecanswim.onetomany;
+package me.moosecanswim.onetomany.Model;
+
+import me.moosecanswim.onetomany.Model.Director;
 
 import javax.persistence.*;
 

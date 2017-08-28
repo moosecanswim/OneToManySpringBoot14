@@ -1,4 +1,4 @@
-package me.moosecanswim.onetomany;
+package me.moosecanswim.onetomany.Model;
 
 import javax.persistence.*;
 import java.util.Set;
