@@ -36,7 +36,8 @@
                                 <td th:text="*{m.director}">director goes here</td>
                                 <td th:text="*{m.year}"></td>
                                 <td th:text="*{m.description}"></td>
-                                <td><a th:href="@{/processMovieAsigment/{directorId}/{movieId}(directorId=${aDirector.id}),(movieId=${m.id})}">Assign this movie to director</a></td>
+                                <td><a th:href="@{/processMovieAsigment/{directorId}/{movieId}(directorId=${aDirector.id},movieId=${m.id})}">Assign this movie to director</a></td>
+
                             </tr>
                         </table>
                     </div>

@@ -40,21 +40,21 @@
                                         </div>
                                     </div>
 
-                                    <!--select movies for the director-->
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">Movies: </label>
-                                        <div class="col-md-4 inputGroupContainer">
-                                            <div class="input-group">
-                                                <select multiple>
-                                                    <option value="">Select Test Order</option>
-                                                    <option th:each="m:${listMovies}"
-                                                            th:value="${m.id}"
-                                                            th:text="${m.title}">
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!--&lt;!&ndash;select movies for the director&ndash;&gt;-->
+                                    <!--<div class="form-group">-->
+                                        <!--<label class="col-md-4 control-label">Movies: </label>-->
+                                        <!--<div class="col-md-4 inputGroupContainer">-->
+                                            <!--<div class="input-group">-->
+                                                <!--<select multiple>-->
+                                                    <!--<option value="">Select Test Order</option>-->
+                                                    <!--<option th:each="m:${listMovies}"-->
+                                                            <!--th:value="${m.id}"-->
+                                                            <!--th:text="${m.title}">-->
+                                                    <!--</option>-->
+                                                <!--</select>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
 
                                     <div class="input-group">
                                         <button type="submit" value="Submit">Submit</button>

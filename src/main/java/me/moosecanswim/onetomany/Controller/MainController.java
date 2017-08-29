@@ -26,36 +26,43 @@ public class MainController {
 
     @RequestMapping("/")
     public String index(Model model){
-        //create a director
-        Director director = new Director();
-        director.setName("Stephen Bullock");
-        director.setGenre("Sci Fi");
 
-        //create a movie
-        Movie movie=new Movie();
-        movie.setTitle("Star Movie");
-        movie.setYear(2017);
-        movie.setDescription("About Stars...");
 
-        //add the movie to an empty list
-        Set<Movie> movies=new HashSet<Movie>();
-
-        movies.add(movie);
-
-        movie=new Movie();
-        movie.setTitle("DeathStar Ewoks");
-        movie.setYear(2011);
-        movie.setDescription("About Ewoks on the DeathStar...");
-        movies.add(movie);
-
-        //add the list of movies to the director's movie list
-        director.setMovies(movies);
-
-        //save the director to the database
-        directorRepository.save(director);
-
-        //Grab all the directors from the database and send them to the template
-        model.addAttribute("directors",directorRepository.findAll());
+//        //create a movie
+//        Movie movie=new Movie();
+//        movie.setTitle("Star Movie");
+//        movie.setYear(2017);
+//        movie.setDescription("About Stars...");
+//        movieRepository.save(movie);
+//
+//        //add the movie to an empty list
+//        Set<Movie> movies=new HashSet<Movie>();
+//
+//        //create a director
+//        Director director = new Director();
+//        director.setName("Stephen Spielberg");
+//        director.setGenre("Sci Fi");
+//        director.addMovie(movie);
+//        //save the director to the database
+//        directorRepository.save(director);
+//
+//        movies.add(movie);
+//
+//        movie=new Movie();
+//        movie.setTitle("DeathStar Ewoks");
+//        movie.setYear(2011);
+//        movie.setDescription("About Ewoks on the DeathStar...");
+//        movies.add(movie);
+//        movieRepository.save(movie);
+//
+//        //add the list of movies to the director's movie list
+//        director.setMovies(movies);
+//
+//
+//
+//
+//        //Grab all the directors from the database and send them to the template
+//        model.addAttribute("directors",directorRepository.findAll());
         return "index";
     }
 
@@ -112,10 +119,16 @@ public class MainController {
         Director aDirector = directorRepository.findOne(directorId);
         Movie aMovie= movieRepository.findOne(movieId);
 
-        Set<Movie> temp=aDirector.getMovies();
-        temp.add(aMovie);
+       // System.out.println("dir id: " + directorId);
+       // System.out.println("movie id: " + movieId);
 
-        aDirector.setMovies(temp);
-        return "redirect:/showDirectors";
+        aMovie.setDirector(aDirector);
+        movieRepository.save(aMovie);
+        System.out.println("a movies director " + aMovie.getDirector().getName());
+        aDirector.addMovie(aMovie);
+
+
+        System.out.println("finished processing a movie");
+        return "redirect:/assignMoviesToDirector/"+directorId;
     }
 }

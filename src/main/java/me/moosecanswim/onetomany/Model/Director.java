@@ -1,6 +1,7 @@
 package me.moosecanswim.onetomany.Model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -11,17 +12,12 @@ public class Director {
     private String name;
     private String genre;
 
-    public Set<Movie> getMovies() {
-        return movies;
-    }
-
-    public void setMovies(Set<Movie> movies) {
-        this.movies = movies;
-    }
-
-    @OneToMany(mappedBy="director", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="director", cascade = CascadeType.ALL, fetch=FetchType.EAGER) //looking for a field called director
     private Set<Movie> movies;
 
+    public Director(){
+        setMovies(new HashSet<Movie>());
+    }
 
     public long getId() {
         return id;
@@ -47,5 +43,21 @@ public class Director {
         this.genre = genre;
     }
 
+    public Set<Movie> getMovies() {
+        return movies;
+    }
 
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
+    }
+
+    public void addMovie(Movie m){
+//        m.setDirector(this);
+        this.movies.add(m);
+    }
+
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }
