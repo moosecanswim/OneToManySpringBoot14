@@ -28,7 +28,9 @@
                                     <td th:text="*{d.name}"></td>
                                     <td th:text="*{d.genre}"></td>
                                     <td>Movies List Goes Here</td>
-                                    <td>actions go here</td>
+                                    <td>
+                                        <p>actions go here - <a th:href="@{/assignMoviesToDirector/{id} (id=${d.id})}">Assign Movie</a></p>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
