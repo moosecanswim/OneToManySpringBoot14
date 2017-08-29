@@ -57,4 +57,9 @@ public class Movie {
     public void setDirector(Director director) {
         this.director = director;
     }
+
+    @Override
+    public String toString(){
+        return this.title;
+    }
 }

@@ -79,7 +79,7 @@ public class MainController {
             return "FormMovie";
         }
         movieRepository.save(aMovie);
-        return "index";
+        return "redirect:/showMovies";
     }
     @RequestMapping(value="/addDirector", method= RequestMethod.GET)
     public String addDirector(Model toSend){
@@ -93,7 +93,7 @@ public class MainController {
             return "FormDirector";
         }
         directorRepository.save(aDirector);
-        return "index";
+        return "redirect:/showDirectors";
     }
 
     @RequestMapping("/showDirectors")
@@ -107,10 +107,22 @@ public class MainController {
         return "showMovies";
     }
     @RequestMapping("/assignMoviesToDirector/{id}")
-    public String directorDetails(Model model,@PathVariable("id") long id){
+    public String assignMoviesToDirector(Model model,@PathVariable("id") long id){
         model.addAttribute("aDirector",directorRepository.findOne(id));
         model.addAttribute("listMovies",movieRepository.findAll());
         return "assignMoviesToDirector";
+    }
+    @RequestMapping("/detailsDirector/{id}")
+    public String directorDetails(Model model,@PathVariable("id") long id){
+        Director aDirector=directorRepository.findOne(id);
+        model.addAttribute("aDirector",aDirector);
+        model.addAttribute("listMovies",movieRepository.findByDirector(aDirector));
+        return "detailsDirector";
+    }
+    @RequestMapping("/detailsMovie/{id}")
+    public String movieDetails(Model model,@PathVariable("id") long id){
+        model.addAttribute("aMovie", movieRepository.findOne(id));
+        return "detailsMovie";
     }
     @RequestMapping("/processMovieAsigment/{directorId}/{movieId}")
     public String processMovieAsigment(@PathVariable("movieId") long movieId,
@@ -130,5 +142,40 @@ public class MainController {
 
         System.out.println("finished processing a movie");
         return "redirect:/assignMoviesToDirector/"+directorId;
+    }
+
+
+    @RequestMapping("/delete/{type}/{id}")
+    public String delete(@PathVariable("type")String type,@PathVariable("id") long id){
+        String whereTo = null;
+        switch(type){
+            case "director":
+                System.out.println("Deleting director: " + directorRepository.findOne(id).toString());
+                directorRepository.delete(id);
+                whereTo="showDirectors";
+                break;
+            case "movie":
+                System.out.println("Deleting movie: " + movieRepository.findOne(id).toString());
+                movieRepository.delete(id);
+                whereTo="showMovies";
+                break;
+        }
+    return "redirect:/"+whereTo;
+    }
+    @RequestMapping("/update/{type}/{id}")
+    public String update(@PathVariable("type")String type,@PathVariable("id") long id,Model model){
+        String whereTo = null;
+        switch(type){
+            case "director":
+                model.addAttribute("aDirector", directorRepository.findOne(id));
+                whereTo="FormDirector";
+                break;
+            case "movie":
+                model.addAttribute("listDirectors",directorRepository.findAll());
+                model.addAttribute("aMovie", movieRepository.findOne(id));
+                whereTo="FormMovie";
+                break;
+        }
+        return whereTo;
     }
 }
